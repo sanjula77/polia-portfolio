@@ -1,4 +1,4 @@
-import { supabase, supabaseAdmin } from './supabaseClient';
+import { supabase, createSupabaseAdmin } from './supabaseClient';
 
 // Types
 export interface Project {
@@ -342,6 +342,7 @@ export const cvService = {
 export const messageService = {
   // Create message (public) - use admin client to bypass RLS
   async create(messageData: CreateMessageData): Promise<Message> {
+    const supabaseAdmin = createSupabaseAdmin();
     const { data, error } = await supabaseAdmin
       .from('messages')
       .insert([messageData])
@@ -354,6 +355,7 @@ export const messageService = {
 
   // Get all messages (admin)
   async getAllAdmin(): Promise<Message[]> {
+    const supabaseAdmin = createSupabaseAdmin();
     const { data, error } = await supabaseAdmin
       .from('messages')
       .select('*')
@@ -365,6 +367,7 @@ export const messageService = {
 
   // Get message by ID (admin)
   async getById(id: string): Promise<Message | null> {
+    const supabaseAdmin = createSupabaseAdmin();
     const { data, error } = await supabaseAdmin
       .from('messages')
       .select('*')
@@ -377,6 +380,7 @@ export const messageService = {
 
   // Mark message as read (admin)
   async markAsRead(id: string): Promise<Message> {
+    const supabaseAdmin = createSupabaseAdmin();
     const { data, error } = await supabaseAdmin
       .from('messages')
       .update({ read: true })
@@ -390,6 +394,7 @@ export const messageService = {
 
   // Mark message as replied (admin)
   async markAsReplied(id: string): Promise<Message> {
+    const supabaseAdmin = createSupabaseAdmin();
     const { data, error } = await supabaseAdmin
       .from('messages')
       .update({ replied: true })
@@ -403,6 +408,7 @@ export const messageService = {
 
   // Delete message (admin)
   async delete(id: string): Promise<void> {
+    const supabaseAdmin = createSupabaseAdmin();
     const { error } = await supabaseAdmin
       .from('messages')
       .delete()

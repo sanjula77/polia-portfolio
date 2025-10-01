@@ -1,4 +1,4 @@
-import { supabase, supabaseAdmin } from './supabaseClient'
+import { supabase, createSupabaseAdmin } from './supabaseClient'
 
 // Storage bucket names
 export const STORAGE_BUCKETS = {
@@ -10,6 +10,8 @@ export const STORAGE_BUCKETS = {
 // Initialize storage buckets (run this once)
 export async function initializeStorageBuckets() {
   try {
+    const supabaseAdmin = createSupabaseAdmin();
+    
     // Check if buckets already exist
     const { data: existingBuckets } = await supabaseAdmin.storage.listBuckets()
     const bucketNames = existingBuckets?.map(b => b.name) || []
@@ -73,6 +75,7 @@ export async function uploadFile(
 ) {
   try {
     // Use admin client for uploads to bypass RLS
+    const supabaseAdmin = createSupabaseAdmin();
     const { data, error } = await supabaseAdmin.storage
       .from(bucket)
       .upload(path, file, {
