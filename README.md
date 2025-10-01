@@ -234,7 +234,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 If you have any questions or need help:
 
-- 📧 Email: [sanjulagihan94@.com]
+- 📧 Email: sanjulagihan94@.com
 - 🐛 Issues: [GitHub Issues](https://github.com/sanjula77/polia-portfolio/issues)
 - 💬 Discussions: [GitHub Discussions](https://github.com/sanjula77/polia-portfolio/discussions)
 
