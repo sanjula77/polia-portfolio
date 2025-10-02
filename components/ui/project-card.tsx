@@ -1,7 +1,8 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Star } from 'lucide-react';
+import { ExternalLink, Github, Star, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
@@ -22,11 +23,18 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const maxLength = 120;
+  const shouldTruncate = project.description.length > maxLength;
+  const displayDescription = shouldTruncate && !isExpanded
+    ? project.description.slice(0, maxLength) + '...'
+    : project.description;
+
   return (
     <motion.div
       whileHover={{ y: -8 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      className="group relative bg-card border border-border rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300"
+      className="group relative bg-card border border-border rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 h-[520px] flex flex-col"
     >
       {project.featured && (
         <div className="absolute top-4 right-4 z-10">
@@ -50,27 +58,52 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       </div>
 
       {/* Content */}
-      <div className="p-6">
-        <div className="mb-4">
-          <h3 className="text-xl font-semibold mb-2 group-hover:text-accent transition-colors duration-200">
+      <div className="p-6 flex flex-col flex-1">
+        <div className="mb-4 flex-1">
+          <h3 className="text-xl font-semibold mb-3 group-hover:text-accent transition-colors duration-200 line-clamp-2">
             {project.title}
           </h3>
-          <p className="text-muted-foreground text-sm leading-relaxed">
-            {project.description}
-          </p>
+          <div className="text-muted-foreground text-sm leading-relaxed mb-2">
+            <p className={`${!isExpanded ? 'line-clamp-3' : ''}`}>
+              {displayDescription}
+            </p>
+            {shouldTruncate && (
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="inline-flex items-center mt-2 text-accent hover:text-accent/80 transition-colors text-xs font-medium"
+              >
+                {isExpanded ? (
+                  <>
+                    <ChevronUp className="w-3 h-3 mr-1" />
+                    Show less
+                  </>
+                ) : (
+                  <>
+                    <ChevronDown className="w-3 h-3 mr-1" />
+                    Read more
+                  </>
+                )}
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.tags.map((tag) => (
+        <div className="flex flex-wrap gap-2 mb-4 min-h-[2rem]">
+          {project.tags.slice(0, 4).map((tag) => (
             <Badge key={tag} variant="outline" className="text-xs">
               {tag}
             </Badge>
           ))}
+          {project.tags.length > 4 && (
+            <Badge variant="outline" className="text-xs bg-muted">
+              +{project.tags.length - 4}
+            </Badge>
+          )}
         </div>
 
         {/* Actions */}
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 mt-auto">
           {project.demoUrl && project.demoUrl !== '#' ? (
             <Button
               size="sm"

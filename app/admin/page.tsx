@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Users, FileText, MessageSquare, TrendingUp, Plus } from 'lucide-react';
+import { Users, FileText, MessageSquare, TrendingUp, Plus, LogOut } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -10,6 +10,8 @@ import ProjectsAdmin from '@/components/admin/projects-admin';
 import BlogAdmin from '@/components/admin/blog-admin';
 import MessagesAdmin from '@/components/admin/messages-admin';
 import CVAdmin from '@/components/admin/cv-admin';
+import AdminLogin from '@/components/admin/admin-login';
+import { useAdminAuth } from '@/hooks/use-admin-auth';
 
 const statsData = [
   {
@@ -44,13 +46,27 @@ const statsData = [
 
 export default function AdminDashboard() {
   const [mounted, setMounted] = useState(false);
+  const { isAuthenticated, isLoading, login, logout } = useAdminAuth();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return null;
+  if (!mounted || isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          className="w-8 h-8 border-2 border-accent border-t-transparent rounded-full"
+        />
+      </div>
+    );
+  }
+
+  // Show login form if not authenticated
+  if (!isAuthenticated) {
+    return <AdminLogin onLogin={login} />;
   }
 
   return (
@@ -60,10 +76,20 @@ export default function AdminDashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="mb-8"
+          className="mb-8 flex justify-between items-center"
         >
-          <h1 className="text-3xl font-bold mb-2">Admin Dashboard</h1>
-          <p className="text-muted-foreground">Manage your portfolio content and analytics</p>
+          <div>
+            <h1 className="text-3xl font-bold mb-2">Admin Dashboard</h1>
+            <p className="text-muted-foreground">Manage your portfolio content and analytics</p>
+          </div>
+          <Button
+            variant="outline"
+            onClick={logout}
+            className="flex items-center space-x-2"
+          >
+            <LogOut className="w-4 h-4" />
+            <span>Logout</span>
+          </Button>
         </motion.div>
 
         {/* Stats Grid */}

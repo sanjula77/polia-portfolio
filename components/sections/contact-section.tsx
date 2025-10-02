@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Send, Mail, MessageCircle, User } from 'lucide-react';
+import { Send, Mail, MessageCircle, User, Github, Linkedin, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -107,19 +107,46 @@ export default function ContactSection() {
 
             {/* Social Links */}
             <div className="pt-8 border-t border-border">
-              <h4 className="font-medium mb-4">Connect with me</h4>
-              <div className="flex space-x-4">
-                {['LinkedIn', 'GitHub', 'Twitter'].map((platform) => (
-                  <motion.a
-                    key={platform}
-                    href="#"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-10 h-10 bg-muted hover:bg-accent/10 rounded-lg flex items-center justify-center text-muted-foreground hover:text-accent transition-colors duration-200"
-                  >
-                    <span className="text-sm font-medium">{platform[0]}</span>
-                  </motion.a>
-                ))}
+              <h4 className="font-medium mb-6">Connect with me</h4>
+              <div className="flex space-x-3">
+                <motion.a
+                  href="https://github.com/sanjula77"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05, y: -1 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  className="group w-14 h-14 bg-slate-100 dark:bg-slate-800 hover:bg-slate-900 dark:hover:bg-slate-100 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-white dark:hover:text-slate-900 transition-colors duration-200 shadow-sm hover:shadow-md border border-slate-200 dark:border-slate-700"
+                  title="GitHub"
+                >
+                  <Github className="w-6 h-6" />
+                </motion.a>
+
+                <motion.a
+                  href="https://www.linkedin.com/in/gihan49/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05, y: -1 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  className="group w-14 h-14 bg-blue-100 dark:bg-blue-900/30 hover:bg-blue-600 dark:hover:bg-blue-600 rounded-xl flex items-center justify-center text-blue-600 dark:text-blue-400 hover:text-white transition-colors duration-200 shadow-sm hover:shadow-md border border-blue-200 dark:border-blue-800"
+                  title="LinkedIn"
+                >
+                  <Linkedin className="w-6 h-6" />
+                </motion.a>
+
+                <motion.a
+                  href="https://wa.me/94714858298"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05, y: -1 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  className="group w-14 h-14 bg-green-100 dark:bg-green-900/30 hover:bg-green-600 dark:hover:bg-green-600 rounded-xl flex items-center justify-center text-green-600 dark:text-green-400 hover:text-white transition-colors duration-200 shadow-sm hover:shadow-md border border-green-200 dark:border-green-800"
+                  title="WhatsApp"
+                >
+                  <Phone className="w-6 h-6" />
+                </motion.a>
               </div>
             </div>
           </motion.div>

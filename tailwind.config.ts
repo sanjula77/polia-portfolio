@@ -78,10 +78,28 @@ const config: Config = {
             height: '0',
           },
         },
+        'marquee-left': {
+          from: {
+            transform: 'translateX(0)',
+          },
+          to: {
+            transform: 'translateX(calc(-100% - var(--gap, 1rem)))',
+          },
+        },
+        'marquee-up': {
+          from: {
+            transform: 'translateY(0)',
+          },
+          to: {
+            transform: 'translateY(calc(-100% - var(--gap, 1rem)))',
+          },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'marquee-left': 'marquee-left var(--duration, 30s) linear infinite',
+        'marquee-up': 'marquee-up var(--duration, 30s) linear infinite',
       },
     },
   },

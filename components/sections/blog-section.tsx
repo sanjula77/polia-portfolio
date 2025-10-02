@@ -2,16 +2,29 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Calendar, Clock, ArrowRight } from 'lucide-react';
+import { Calendar, Clock, ArrowRight, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { blogService, type Blog } from '@/lib/database';
+import BlogModal from '@/components/ui/blog-modal';
 
 export default function BlogSection() {
   const [posts, setPosts] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedBlog, setSelectedBlog] = useState<Blog | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const handleReadMore = (blog: Blog) => {
+    setSelectedBlog(blog);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedBlog(null);
+  };
 
   useEffect(() => {
     loadPosts();
@@ -62,7 +75,7 @@ export default function BlogSection() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group bg-card border border-border rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-2"
+                className="group bg-card border border-border rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-2 h-[480px] flex flex-col"
               >
                 <div className="relative h-48 overflow-hidden">
                   <motion.img
@@ -79,7 +92,7 @@ export default function BlogSection() {
                   </div>
                 </div>
 
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-1">
                   <div className="flex items-center space-x-4 text-sm text-muted-foreground mb-4">
                     <div className="flex items-center space-x-1">
                       <Calendar className="w-4 h-4" />
@@ -91,17 +104,23 @@ export default function BlogSection() {
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-semibold mb-3 group-hover:text-accent transition-colors duration-200 line-clamp-2">
-                    {post.title}
-                  </h3>
+                  <div className="flex-1 mb-4">
+                    <h3 className="text-xl font-semibold mb-3 group-hover:text-accent transition-colors duration-200 line-clamp-2">
+                      {post.title}
+                    </h3>
 
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-3">
-                    {post.excerpt}
-                  </p>
+                    <p className="text-muted-foreground text-sm leading-relaxed line-clamp-4">
+                      {post.excerpt}
+                    </p>
+                  </div>
 
-                  <Button variant="ghost" className="p-0 h-auto font-medium group-hover:text-accent">
+                  <Button
+                    variant="ghost"
+                    onClick={() => handleReadMore(post)}
+                    className="p-2 h-auto font-medium text-accent hover:text-accent-foreground hover:bg-accent/10 rounded-md transition-all duration-200 mt-auto self-start"
+                  >
+                    <Eye className="w-4 h-4 mr-2" />
                     Read more
-                    <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-200" />
                   </Button>
                 </div>
               </motion.article>
@@ -121,6 +140,13 @@ export default function BlogSection() {
           </Button>
         </motion.div>
       </div>
+
+      {/* Blog Modal */}
+      <BlogModal
+        blog={selectedBlog}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
     </section>
   );
 }

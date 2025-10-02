@@ -34,6 +34,10 @@
     --geometry-opacity-light: 0.4;
     --geometry-opacity-dark: 0.8;
     --geometry-emissive-intensity: 0;
+    
+    /* Feature card shadows */
+    --feature-card: 0 -1px 3px 0 rgb(0 0 0 / 0.05);
+    --shadow-feature-card: var(--feature-card);
   }
 
   .dark {
@@ -66,6 +70,9 @@
     --geometry-opacity-light: 0.4;
     --geometry-opacity-dark: 0.8;
     --geometry-emissive-intensity: 0.1;
+    
+    /* Dark mode feature card shadows */
+    --feature-card: 0 0 0 1px rgb(255 255 255 / 0.06), 0 -1px rgb(255 255 255 / 0.1);
   }
 }
 
@@ -111,4 +118,57 @@ canvas {
   will-change: transform;
   backface-visibility: hidden;
   transform: translateZ(0);
+}
+
+/* Marquee animations for seamless infinite scrolling */
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap, 1rem)));
+  }
+}
+
+@keyframes marquee-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--gap, 1rem)));
+  }
+}
+
+/* Line clamp utilities for text truncation */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.line-clamp-4 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+/* Feature card shadow utility */
+.shadow-feature-card {
+  box-shadow: var(--shadow-feature-card);
 }
