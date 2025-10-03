@@ -137,7 +137,7 @@ export default function BlogModal({ blog, isOpen, onClose }: BlogModalProps) {
                                                         {children}
                                                     </blockquote>
                                                 ),
-                                                code: ({ inline, children, ...props }) => (
+                                                code: ({ inline, children, ...props }: { inline?: boolean; children: React.ReactNode;[key: string]: any }) => (
                                                     inline ? (
                                                         <code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono text-accent" {...props}>
                                                             {children}
