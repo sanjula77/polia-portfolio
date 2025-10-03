@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
+import type { Components } from 'react-markdown';
 import 'highlight.js/styles/github-dark.css';
 
 interface Blog {
@@ -137,7 +138,7 @@ export default function BlogModal({ blog, isOpen, onClose }: BlogModalProps) {
                                                         {children}
                                                     </blockquote>
                                                 ),
-                                                code: ({ inline, children, ...props }: { inline?: boolean; children: React.ReactNode;[key: string]: any }) => (
+                                                code: ({ inline, children, ...props }: any) => (
                                                     inline ? (
                                                         <code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono text-accent" {...props}>
                                                             {children}
