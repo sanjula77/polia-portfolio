@@ -4,6 +4,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Calendar, MapPin, GraduationCap, Code, Database, Cloud, Brain, Wrench, User, Briefcase, Award, Clock, Monitor, Palette } from 'lucide-react';
 import StacksCard from '@/components/ui/stacks-card';
+import { Badge } from '@/components/ui/badge';
 
 const timeline = [
   {
@@ -147,7 +148,7 @@ export default function AboutSection() {
                 scale: 1.02,
                 y: -4
               }}
-              transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
+              transition={{ duration: 0.15, ease: "easeOut" }}
               className="bg-white dark:bg-[#1d293b] rounded-xl p-6 shadow-lg cursor-pointer group"
             >
               <div className="flex flex-col items-center text-center">
@@ -167,7 +168,7 @@ export default function AboutSection() {
                 scale: 1.02,
                 y: -4
               }}
-              transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.15, ease: "easeOut" }}
               className="bg-white dark:bg-[#1d293b] rounded-xl p-6 shadow-lg cursor-pointer group"
             >
               <div className="flex flex-col items-center text-center">
@@ -187,7 +188,7 @@ export default function AboutSection() {
                 scale: 1.02,
                 y: -4
               }}
-              transition={{ duration: 0.6, delay: 0.9, ease: "easeOut" }}
+              transition={{ duration: 0.15, ease: "easeOut" }}
               className="bg-white dark:bg-[#1d293b] rounded-xl p-6 shadow-lg cursor-pointer group"
             >
               <div className="flex flex-col items-center text-center">
@@ -225,9 +226,26 @@ export default function AboutSection() {
               </div>
               <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Frontend Development</h4>
             </div>
-            <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+            <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4">
               Creating responsive, accessible interfaces with React, TypeScript, and modern CSS frameworks
             </p>
+            <div className="flex flex-wrap gap-2">
+              <Badge variant="outline" className="text-xs border-blue-200 text-blue-700 dark:border-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
+                Next.js
+              </Badge>
+              <Badge variant="outline" className="text-xs border-blue-200 text-blue-700 dark:border-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
+                React
+              </Badge>
+              <Badge variant="outline" className="text-xs border-blue-200 text-blue-700 dark:border-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
+                TypeScript
+              </Badge>
+              <Badge variant="outline" className="text-xs border-blue-200 text-blue-700 dark:border-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
+                Tailwind CSS
+              </Badge>
+              <Badge variant="outline" className="text-xs border-blue-200 text-blue-700 dark:border-blue-700 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
+                Framer Motion
+              </Badge>
+            </div>
           </motion.div>
 
           {/* Backend Architecture */}
@@ -238,7 +256,7 @@ export default function AboutSection() {
               scale: 1.02,
               y: -4
             }}
-            transition={{ duration: 0.6, delay: 1.2, ease: "easeOut" }}
+            transition={{ duration: 0.15, ease: "easeOut" }}
             className="bg-white dark:bg-[#1d293b] rounded-xl p-6 shadow-lg cursor-pointer group"
           >
             <div className="flex items-center mb-4">
@@ -247,9 +265,29 @@ export default function AboutSection() {
               </div>
               <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Backend Architecture</h4>
             </div>
-            <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+            <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4">
               Building scalable APIs and databases with Python, FastAPI, and cloud infrastructure
             </p>
+            <div className="flex flex-wrap gap-2">
+              <Badge variant="outline" className="text-xs border-purple-200 text-purple-700 dark:border-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors">
+                Python
+              </Badge>
+              <Badge variant="outline" className="text-xs border-purple-200 text-purple-700 dark:border-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors">
+                FastAPI
+              </Badge>
+              <Badge variant="outline" className="text-xs border-purple-200 text-purple-700 dark:border-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors">
+                Node.js
+              </Badge>
+              <Badge variant="outline" className="text-xs border-purple-200 text-purple-700 dark:border-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors">
+                PostgreSQL
+              </Badge>
+              <Badge variant="outline" className="text-xs border-purple-200 text-purple-700 dark:border-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors">
+                MongoDB
+              </Badge>
+              <Badge variant="outline" className="text-xs border-purple-200 text-purple-700 dark:border-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors">
+                Docker
+              </Badge>
+            </div>
           </motion.div>
 
           {/* AI & Data Science */}
@@ -260,7 +298,7 @@ export default function AboutSection() {
               scale: 1.02,
               y: -4
             }}
-            transition={{ duration: 0.6, delay: 1.3, ease: "easeOut" }}
+            transition={{ duration: 0.15, ease: "easeOut" }}
             className="bg-white dark:bg-[#1d293b] rounded-xl p-6 shadow-lg cursor-pointer group"
           >
             <div className="flex items-center mb-4">
@@ -269,9 +307,29 @@ export default function AboutSection() {
               </div>
               <h4 className="text-lg font-semibold text-gray-900 dark:text-white">AI & Data Science</h4>
             </div>
-            <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+            <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4">
               Developing machine learning models and data analysis solutions with Python and modern AI tools
             </p>
+            <div className="flex flex-wrap gap-2">
+              <Badge variant="outline" className="text-xs border-emerald-200 text-emerald-700 dark:border-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors">
+                Python
+              </Badge>
+              <Badge variant="outline" className="text-xs border-emerald-200 text-emerald-700 dark:border-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors">
+                NumPy
+              </Badge>
+              <Badge variant="outline" className="text-xs border-emerald-200 text-emerald-700 dark:border-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors">
+                Pandas
+              </Badge>
+              <Badge variant="outline" className="text-xs border-emerald-200 text-emerald-700 dark:border-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors">
+                TensorFlow
+              </Badge>
+              <Badge variant="outline" className="text-xs border-emerald-200 text-emerald-700 dark:border-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors">
+                Scikit-learn
+              </Badge>
+              <Badge variant="outline" className="text-xs border-emerald-200 text-emerald-700 dark:border-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors">
+                Streamlit
+              </Badge>
+            </div>
           </motion.div>
         </motion.div>
       </div>
